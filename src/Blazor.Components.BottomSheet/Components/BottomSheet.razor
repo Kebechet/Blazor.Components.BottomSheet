@@ -1,0 +1,26 @@
+﻿
+<div style=@_contentStyle class="@($"bottom-sheet-{_elementId}")" @onclick:stopPropagation=@true>
+    <style type="text/css">
+        .bottom-sheet-content-scrollable {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .bottom-sheet-content-scrollable::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+    </style>
+
+    <div style="@_contentFramePadding">
+        @if(FixedContent is not null)
+        {
+            <div style=@_contentFixedStyle class="bottom-sheet-content-fixed">
+                @FixedContent
+            </div>
+        }
+
+        <div style=@_contentScrollableStyle class="bottom-sheet-content-scrollable">
+            @Content
+        </div>
+    </div>
+</div>

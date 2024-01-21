@@ -1,0 +1,10 @@
+﻿@inject BottomSheetService _bottomSheetService
+@inject NavigationManager _navigationManager
+
+<div style=@_wrapperStyle class="bottom-sheet-container" @onclick=@(async ()=> await Hide(true))>
+    @for (int i = 0; i < _bottomSheetData.Count; i++)
+    {
+        var bottomSheetIndex = i;
+        @_bottomSheetData[bottomSheetIndex].RenderFragment
+    }
+</div>
