@@ -1,93 +1,100 @@
-﻿# Blazor.Components.Popup
+﻿# Blazor.Components.BottomSheet
 
-This repo contain `PopupWrapper` component. It's purpose is to simplify Popup usage in Blazor.
+This repo contain `BottomSheet` Blazor component.
 
 ## Setup
-- Install nuget package `Kebechet.Blazor.Components.Popup`
+- Install nuget package `Kebechet.Blazor.Components.BottomSheet`
 - In your `Program.cs` add:
 ```cs
-builder.Services.AddPopupWrapperServices();
+builder.Services.AddBottomSheetServices();
 ```
+- Ideally in `MainLayout.razor` put `<BottomSheetContainer />` component. This component is controlled from `BottomSheetService` and it's purpose is to render `BottomSheet` content.
 
 ## Usage
-- Ideally in `MainLayout.razor` put `<PopupWrapper />` component. This component is controlled from `PopupService` and it's purpose is to render popup content.
-    - ⚠️ At one time only 1 popup can be rendered.
-- In component where you would like to render popup inject Popup service like:
+- In component where you would like to render `BottomSheet` inject service:
 ```cs
-@inject PopupWrapperService _popupWrapperService
+@inject BottomSheetService _bottomSheetService
 ```
 
-- Create Popup content component. E.g. `YesNoPopup.razor` that implements interface `IPopupable<T>` with return type you need to get from the Popup. This popup content will be rendered
-inside `PopupWrapper`.
-    - ⚠️ I recommend to always use nullable type like `IPopupable<bool?>` because that way you can differentiate between person clicking `NO`/`False` and person closing the popup be clicking 
-    outside of it.
-    - ⚠️ The child component must have `[Parameter]` at the beginning of the `OnReturn` property, otherwise it won't work.
+- Create `BottomSheet` content component. E.g. `OptionBottomSheet.razor` that implements interface `IBottomSheet` in case you don't want to return any value from the `BottomSheet` or `IBottomSheetReturnable<T>` with return type `T`.
+    - ⚠️ The child component must have `[Parameter]` at the beginning of the `OnReturnValue` property, otherwise it won't work.
 
-`YesNoPopup.razor` part
+`Index.razor` part
 
 ```cs
-@using Blazor.Components.Popup.Components;
+@page "/"
+@using BlazorApp11.Components
+@using SatisFIT.Client.App.Services
+@inject BottomSheetService _bottomSheetService
 
-<span>Do you want to save changes ?</span>
-<button @onclick="()=>Process(true)">Yes, I do</button>
-<button @onclick="()=>Process(false)">No, I don't</button>
+<PageTitle>Home</PageTitle>
 
-```
+<button class="btn btn-primary" @onclick="Show">Click me</button>
 
-`YesNoPopup.razor.cs` part
+<span>Result: @_selectedValue</span>
 
-```cs
-using Blazor.Components.Popup.Components;
-using Microsoft.AspNetCore.Components;
+@code{
+    public int _selectedValue { get; set; } = 0;
 
-namespace BlazorApp7.Pages;
-
-public partial class YesNoComponent : IPopupable<bool?>
-{
-    [Parameter] public EventCallback<bool?> OnReturn { get; set; }
-
-    public async Task Process(bool val)
+    public async Task Show()
     {
-        await OnReturn.InvokeAsync(val);
+        var result = await _bottomSheetService.Show(
+            new OptionBottomSheet()
+            {
+            }
+        );
+
+        _selectedValue = result;
     }
 }
 ```
 
-- then in your component where you would like to render popup:
-  - inject `PopupWrapperService `
-  - add functionality to trigger popup. In our case button `onClick` event
-  - and finally use `Show` method to show `YesNoPopup` and get result from it
+- then in your component where you would like to render `BottomSheet`:
+  - inject `BottomSheetService `
+  - add functionality to trigger `BottomSheet`. In our case button `onClick` event
 
-`YourComponent.razor` 
+`OptionBottomSheet.razor`
 
-```cs
-@inject PopupWrapperService _popupWrapperService
+```
+@using Blazor.Components.BottomSheet.Components
+@using SatisFIT.Client.App.Services
+@inject BottomSheetService _bottomSheetService
 
-<button @onclick="Test">Trigger popup</button>
+<BottomSheet @ref="BottomSheetComponent">
+    <FixedContent>
+        <span>This is header content</span>
+    </FixedContent>
 
-@code{
-    public async Task Test()
-    {
-        var isSuccess =  await _popupWrapperService.Show(new YesNoPopup(), this);
-        if (isSuccess is null)
+    <Content>
+        <input placeholder="write here" />
+
+        @for(int i = 0; i <= 30; i++)
         {
-            // user closed the popup
-        } 
-        else if(isSuccess == true)
-        {
-            // user clicked the button that returns true
-        } 
-        else if(isSuccess == false){
-            // user clicked the button that returns false
+            var index = i;
+            <button @onclick="() => ReturnValue(index)">Content btn @index</button>
+            <br>
         }
+    </Content>
+</BottomSheet>
+```
+
+`OptionBottomSheet.razor.cd`
+```cs
+public partial class OptionBottomSheet : IBottomSheet
+{
+    [Parameter] public BottomSheet? BottomSheetComponent { get; set; }
+    [Parameter] public EventCallback<int> OnReturnValue { get; set; }
+
+    public async Task<bool> CanHideBottomSheet()
+    {
+        return await Task.FromResult(true);
+    }
+
+    public async Task ReturnValue(int number)
+    {
+        await OnReturnValue.InvokeAsync(number);
     }
 }
 ```
 
 - ENJOY 🎉
-
-## Future tasks:
-- [ ] Add support for multiple popups at the same time
-    - Probably through ref like: https://demos.blazorbootstrap.com/confirm-dialog
-- [ ] Consider using `Dialog` HTML element instead of `div`
-    - https://www.youtube.com/watch?v=q1fsBWLpYW4&t=33s
