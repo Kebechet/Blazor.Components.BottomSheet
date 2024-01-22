@@ -36,7 +36,7 @@ public class BottomSheetService
         var taskCompletionSource = new TaskCompletionSource<TOutput>();
         _cancellationTokenSource.Token.Register(() => taskCompletionSource.TrySetCanceled());
 
-        componentToRender.OnReturnValue = new EventCallback<TOutput?>(null, new Action<TOutput>((arg) =>
+        componentToRender.OnReturnValue = new EventCallback<TOutput>(null, new Action<TOutput>((arg) =>
         {
             taskCompletionSource.SetResult(arg);
         }));
