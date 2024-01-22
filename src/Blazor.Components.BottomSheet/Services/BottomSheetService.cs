@@ -17,7 +17,7 @@ public class BottomSheetService
     {
         if (_bottomSheetContainer is null)
         {
-            throw new InvalidOperationException("PopupWrapper is not initialized");
+            throw new InvalidOperationException("BottomSheetContainer is not initialized");
         }
 
         var renderFragment = await _bottomSheetContainer.Show(componentToRender);
@@ -28,7 +28,7 @@ public class BottomSheetService
     {
         if (_bottomSheetContainer is null)
         {
-            throw new InvalidOperationException("PopupWrapper is not initialized");
+            throw new InvalidOperationException("BottomSheetContainer is not initialized");
         }
 
         var _cancellationTokenSource = new CancellationTokenSource();
@@ -61,5 +61,15 @@ public class BottomSheetService
         await _bottomSheetContainer.Hide(false);
 
         return returnValue;
+    }
+
+    public async Task Hide()
+    {
+        if (_bottomSheetContainer is null)
+        {
+            throw new InvalidOperationException("BottomSheetContainer is not initialized");
+        }
+
+        await _bottomSheetContainer.Hide(true);
     }
 }

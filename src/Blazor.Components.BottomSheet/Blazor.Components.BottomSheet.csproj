@@ -20,8 +20,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>Fixed reference type returning</PackageReleaseNotes>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Added manual hide method</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
