@@ -27,18 +27,18 @@ public partial class BottomSheetContainer : ComponentBase
         "left: 0;" +
         "height: 100%;" +
         "width: 100%;" +
-        $"background-color: rgba(0, 0, 0, {_opacity});" +
-        $"backdrop-filter: blur({_blur}px);" +
+        $"background-color: rgba(0, 0, 0, {_opacity.ToString(CultureInfo.InvariantCulture)});" +
+        $"backdrop-filter: blur({_blur.ToString(CultureInfo.InvariantCulture)}px);" +
         "display: flex;" +
         "flex-direction: column;" +
         (IsVisible
            ? "opacity: 1; " +
                 "pointer-events: auto; " +
-                $"transition: all {_transitionDelaySeconds}s ease; " +
+                $"transition: all {_transitionDelaySeconds.ToString(CultureInfo.InvariantCulture)}s ease; " +
                 "transform: translateY(0%);"
            : "opacity: 0;" +
                 "pointer-events: none; " +
-                $"transition: all {_transitionDelaySeconds}s ease; " +
+                $"transition: all {_transitionDelaySeconds.ToString(CultureInfo.InvariantCulture)}s ease; " +
                 "transform: translateY(100%);"
         ) +
         (_isChangingSlide
