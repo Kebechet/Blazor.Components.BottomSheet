@@ -31,17 +31,20 @@ public class BottomSheetService
             throw new InvalidOperationException("BottomSheetContainer is not initialized");
         }
 
-        var _cancellationTokenSource = new CancellationTokenSource();
+        var cancellationTokenSource = new CancellationTokenSource();
 
         var taskCompletionSource = new TaskCompletionSource<TOutput>();
-        _cancellationTokenSource.Token.Register(() => taskCompletionSource.TrySetCanceled());
+        cancellationTokenSource.Token.Register(() => taskCompletionSource.TrySetCanceled());
 
         componentToRender.OnReturnValue = new EventCallback<TOutput>(null, new Action<TOutput>((arg) =>
         {
             taskCompletionSource.SetResult(arg);
         }));
 
-        await _bottomSheetContainer.Show(componentToRender);
+        await _bottomSheetContainer.Show(
+            componentToRender,
+            taskCompletionSource.Task,
+            cancellationTokenSource);
 
         TOutput? returnValue;
         try
@@ -58,7 +61,7 @@ public class BottomSheetService
             returnValue = default;
         }
 
-        await _bottomSheetContainer.Hide(false);
+        await _bottomSheetContainer.Hide();
 
         return returnValue;
     }
@@ -70,6 +73,6 @@ public class BottomSheetService
             throw new InvalidOperationException("BottomSheetContainer is not initialized");
         }
 
-        await _bottomSheetContainer.Hide(true);
+        await _bottomSheetContainer.Hide();
     }
 }

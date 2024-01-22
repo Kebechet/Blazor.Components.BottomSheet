@@ -20,8 +20,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>Added manual hide method</PackageReleaseNotes>
+    <Version>1.1.1</Version>
+    <PackageReleaseNotes>Fixed Task cancellation</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

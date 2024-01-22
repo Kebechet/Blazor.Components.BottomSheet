@@ -54,7 +54,10 @@ public partial class BottomSheetContainer : ComponentBase
         _navigationManager.LocationChanged += OnLocationChanged;
     }
 
-    public async Task<RenderFragment> Show(IBottomSheet bottomSheet)
+    public async Task<RenderFragment> Show(
+        IBottomSheet bottomSheet,
+        Task? task = default,
+        CancellationTokenSource? cancellationTokenSource = default)
     {
         if (_bottomSheetData.Any())
         {
@@ -64,7 +67,9 @@ public partial class BottomSheetContainer : ComponentBase
         var bottomSheetData = new BottomSheetData
         {
             RenderFragment = bottomSheet.CreateRenderFragmentFromInstance(),
-            OnBeforeHide = bottomSheet.CanHideBottomSheet
+            OnBeforeHide = bottomSheet.CanHideBottomSheet,
+            Task = task,
+            CancellationTokenSource = cancellationTokenSource
         };
 
         _bottomSheetData.Add(bottomSheetData);
@@ -76,17 +81,24 @@ public partial class BottomSheetContainer : ComponentBase
         return bottomSheetData.RenderFragment;
     }
 
-    public async Task Hide(bool isManualClose)
+    public async Task Hide()
     {
-        var bottomSheetData = _bottomSheetData.Last();
+        var bottomSheetData = _bottomSheetData.LastOrDefault();
+        if (bottomSheetData is null)
+        {
+            return;
+        }
 
-        if (isManualClose)
+        if (!(bottomSheetData.Task?.IsCompleted ?? true))
         {
             var canHide = await bottomSheetData.OnBeforeHide();
             if (!canHide)
             {
                 return;
             }
+
+            bottomSheetData.CancellationTokenSource?.Cancel(false);
+            return;
         }
 
         await ChangeVisiblity(false, _transitionDelayMilliseconds);
@@ -125,7 +137,7 @@ public partial class BottomSheetContainer : ComponentBase
     {
         if (IsVisible)
         {
-            Hide(true).Wait();
+            Hide().Wait();
         }
     }
 }
