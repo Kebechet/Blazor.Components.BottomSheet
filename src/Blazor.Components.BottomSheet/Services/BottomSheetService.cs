@@ -47,6 +47,11 @@ public class BottomSheetService
         try
         {
             returnValue = await taskCompletionSource.Task;
+            if (!typeof(TOutput?).IsValueType)
+            {
+                //for som reasom after calling `_bottomSheetContainer.Hide` the original value in `returnValue` is disposed. So I create a copy of it.
+                returnValue = (TOutput)FastDeepCloner.DeepCloner.Clone(returnValue);
+            }
         }
         catch (OperationCanceledException)
         {
