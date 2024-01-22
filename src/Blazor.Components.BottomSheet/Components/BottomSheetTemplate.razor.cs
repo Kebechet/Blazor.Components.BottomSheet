@@ -2,7 +2,7 @@
 
 namespace Blazor.Components.BottomSheet.Components;
 
-public partial class BottomSheet
+public partial class BottomSheetTemplate
 {
     [Parameter] public RenderFragment? FixedContent { get; set; }
     [Parameter] public RenderFragment? Content { get; set; }

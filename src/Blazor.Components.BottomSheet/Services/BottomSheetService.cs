@@ -1,8 +1,8 @@
 ﻿using Blazor.Components.BottomSheet.Components;
+using Blazor.Components.BottomSheet.Interfaces;
 using Microsoft.AspNetCore.Components;
-using SatisFIT.Client.App.Pages._PageComponents.BottomSheets;
 
-namespace SatisFIT.Client.App.Services;
+namespace Blazor.Components.BottomSheet.Services;
 
 public class BottomSheetService
 {

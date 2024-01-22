@@ -1,8 +1,9 @@
 ﻿using Blazor.Components.BottomSheet.Extensions;
+using Blazor.Components.BottomSheet.Interfaces;
 using Blazor.Components.BottomSheet.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
-using SatisFIT.Client.App.Pages._PageComponents.BottomSheets;
+using System.Globalization;
 
 namespace Blazor.Components.BottomSheet.Components;
 

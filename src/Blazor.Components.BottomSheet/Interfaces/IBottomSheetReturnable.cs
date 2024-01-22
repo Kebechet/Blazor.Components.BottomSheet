@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace SatisFIT.Client.App.Pages._PageComponents.BottomSheets;
+namespace Blazor.Components.BottomSheet.Interfaces;
 
 public interface IBottomSheetReturnable<T> : IBottomSheet
 {

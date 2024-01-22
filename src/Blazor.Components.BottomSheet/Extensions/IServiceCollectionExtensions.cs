@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SatisFIT.Client.App.Services;
+﻿using Blazor.Components.BottomSheet.Services;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Blazor.Components.Popup.Extensions;
+namespace Blazor.Components.BottomSheet.Extensions;
 
 public static class IServiceCollectionExtensions
 {
