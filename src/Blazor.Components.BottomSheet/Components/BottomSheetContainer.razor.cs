@@ -15,8 +15,8 @@ public partial class BottomSheetContainer : ComponentBase
     private bool IsVisible { get; set; }
     private bool _isChangingSlide { get; set; } = false;
 
-    private double _opacity = 0.0;
-    private double _blur = 10;
+    private double _opacity = 0.2;
+    private double _blur = 2;
     private double _transitionDelaySeconds => _transitionDelayMilliseconds / 1000.0;
     private int _transitionDelayMilliseconds = 300;
 
