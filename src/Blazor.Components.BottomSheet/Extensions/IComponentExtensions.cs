@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace Blazor.Components.BottomSheet.Extensions;
 
-public static class IComponentExtensions
+internal static class IComponentExtensions
 {
-    public static RenderFragment CreateRenderFragmentFromInstance(this IComponent instance)
+    internal static RenderFragment CreateRenderFragmentFromInstance(this IComponent instance)
     {
         int attributeNumber = 0;
 

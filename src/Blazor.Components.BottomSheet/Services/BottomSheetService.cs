@@ -1,6 +1,7 @@
 ﻿using Blazor.Components.BottomSheet.Components;
 using Blazor.Components.BottomSheet.Interfaces;
 using Microsoft.AspNetCore.Components;
+using SatisFIT.Shared.Extensions;
 
 namespace Blazor.Components.BottomSheet.Services;
 
@@ -50,10 +51,10 @@ public class BottomSheetService
         try
         {
             returnValue = await taskCompletionSource.Task;
-            if (!typeof(TOutput?).IsValueType)
+            if (!typeof(TOutput?).IsValueType && returnValue is not null)
             {
                 //for som reasom after calling `_bottomSheetContainer.Hide` the original value in `returnValue` is disposed. So I create a copy of it.
-                returnValue = (TOutput)FastDeepCloner.DeepCloner.Clone(returnValue);
+                returnValue = returnValue.DeepCopy();
             }
         }
         catch (OperationCanceledException)
