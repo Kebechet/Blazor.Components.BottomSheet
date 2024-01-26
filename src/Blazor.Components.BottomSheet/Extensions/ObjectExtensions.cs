@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace SatisFIT.Shared.Extensions;
+namespace Blazor.Components.BottomSheet.Extensions;
 
 internal static class ObjectExtensions
 {

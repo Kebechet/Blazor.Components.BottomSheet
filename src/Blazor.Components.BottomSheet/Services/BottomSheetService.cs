@@ -1,7 +1,7 @@
 ﻿using Blazor.Components.BottomSheet.Components;
+using Blazor.Components.BottomSheet.Extensions;
 using Blazor.Components.BottomSheet.Interfaces;
 using Microsoft.AspNetCore.Components;
-using SatisFIT.Shared.Extensions;
 
 namespace Blazor.Components.BottomSheet.Services;
 
