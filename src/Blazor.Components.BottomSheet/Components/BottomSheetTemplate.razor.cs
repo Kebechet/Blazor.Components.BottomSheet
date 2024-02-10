@@ -11,7 +11,10 @@ public partial class BottomSheetTemplate
     private readonly Guid _elementId = Guid.NewGuid();
 
     private string _contentStyle =>
+        "pointer-events:none;" +
+        "touch-action: none;" +
         "width: 100%;" +
+        "max-width: 100%;" +
         "height: calc(100% - 100px);" +
         "position:fixed;" +
         "top:100px;" +
@@ -29,9 +32,16 @@ public partial class BottomSheetTemplate
         "flex-direction: column;";
 
     private string _contentFixedStyle =>
+        "pointer-events:auto;" +
         "padding-bottom: 0.75rem;";
 
     private string _contentScrollableStyle =>
+        "pointer-events:auto;" +
+        "touch-action: pan-y;" +
+        "overscroll-behavior: none;" +
         "overflow-y: auto;" +
-        "height:100%";
+        "overflow-x: hidden;"+
+        "width:100%;" +
+        "max-width:100%;" +
+        "height:100%;";
 }

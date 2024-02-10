@@ -22,15 +22,19 @@ public partial class BottomSheetContainer : ComponentBase
 
     private string _wrapperStyle =>
         "position: fixed;" +
+        "pointer-events:none;" +
+        "touch-action: none;" +
         "z-index: 1100;" +
         "top: 0;" +
         "left: 0;" +
         "height: 100%;" +
         "width: 100%;" +
+        "max-width: 100%;" +
         $"background-color: rgba(0, 0, 0, {_opacity.ToString(CultureInfo.InvariantCulture)});" +
         $"backdrop-filter: blur({_blur.ToString(CultureInfo.InvariantCulture)}px);" +
         "display: flex;" +
         "flex-direction: column;" +
+        "overflow-x: hidden;" +
         (IsVisible
            ? "opacity: 1; " +
                 "pointer-events: auto; " +
