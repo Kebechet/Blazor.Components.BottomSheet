@@ -6,7 +6,6 @@ public partial class BottomSheetTemplate
 {
     [Parameter] public RenderFragment? FixedContent { get; set; }
     [Parameter] public RenderFragment? Content { get; set; }
-    [Parameter] public Func<Task<bool>>? OnBeforeHide { get; set; }
 
     private readonly Guid _elementId = Guid.NewGuid();
 
