@@ -70,7 +70,7 @@ public partial class BottomSheetContainer : ComponentBase
 
         var bottomSheetData = new BottomSheetData
         {
-            RenderFragment = bottomSheet.CreateRenderFragmentFromInstance(),
+            RenderFragment = bottomSheet.CreateRenderFragmentFromInstance(_serviceProvider),
             OnBeforeHide = bottomSheet.CanHideBottomSheet,
             Task = task,
             CancellationTokenSource = cancellationTokenSource
