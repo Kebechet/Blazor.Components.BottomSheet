@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <Version>1.1.4</Version>
-    <PackageReleaseNotes>Fixed namespaces</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed many problems</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
