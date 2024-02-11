@@ -13,7 +13,7 @@ internal static class IComponentExtensions
         int attributeNumber = 0;
 
         // Inject services into properties marked with [Inject]
-        var injectPropertyInfos = instanceType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+        var injectPropertyInfos = instanceType.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
             .Where(p => p.GetCustomAttributes(typeof(InjectAttribute), true).Any());
 
         foreach (var propertyInfo in injectPropertyInfos)
