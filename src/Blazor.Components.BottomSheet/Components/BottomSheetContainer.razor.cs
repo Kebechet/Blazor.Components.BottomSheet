@@ -31,6 +31,7 @@ public partial class BottomSheetContainer : ComponentBase
         "width: 100%;" +
         "max-width: 100%;" +
         $"background-color: rgba(0, 0, 0, {_opacity.ToString(CultureInfo.InvariantCulture)});" +
+        $"-webkit-backdrop-filter: blur({_blur.ToString(CultureInfo.InvariantCulture)}px);" + //fix for iOS Safari
         $"backdrop-filter: blur({_blur.ToString(CultureInfo.InvariantCulture)}px);" +
         "display: flex;" +
         "flex-direction: column;" +

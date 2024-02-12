@@ -20,8 +20,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
-    <Version>1.1.5</Version>
-    <PackageReleaseNotes>Fixed many problems</PackageReleaseNotes>
+    <Version>1.1.6</Version>
+    <PackageReleaseNotes>Fixed iOS Safari blur</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
