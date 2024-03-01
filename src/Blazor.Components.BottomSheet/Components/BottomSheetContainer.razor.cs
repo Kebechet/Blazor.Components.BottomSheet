@@ -20,7 +20,7 @@ public partial class BottomSheetContainer : ComponentBase
     private double _transitionDelaySeconds => _transitionDelayMilliseconds / 1000.0;
     private int _transitionDelayMilliseconds = 300;
 
-    private string _wrapperStyle =>
+    private string _darkAreaStyle =>
         "position: fixed;" +
         "pointer-events:none;" +
         "touch-action: none;" +
@@ -33,6 +33,39 @@ public partial class BottomSheetContainer : ComponentBase
         $"background-color: rgba(0, 0, 0, {_opacity.ToString(CultureInfo.InvariantCulture)});" +
         $"-webkit-backdrop-filter: blur({_blur.ToString(CultureInfo.InvariantCulture)}px);" + //fix for iOS Safari
         $"backdrop-filter: blur({_blur.ToString(CultureInfo.InvariantCulture)}px);" +
+        "display: flex;" +
+        "flex-direction: column;" +
+        "overflow-x: hidden;" +
+        "transform-origin: top;" +
+        (IsVisible
+           ? "opacity: 1; " +
+                "pointer-events: auto; " +
+                $"transition: all {_transitionDelaySeconds.ToString(CultureInfo.InvariantCulture)}s ease; " +
+                "transform: translateY(0%);" +
+                "transform: scaleY(0.1);" 
+           : "opacity: 0;" +
+                "pointer-events: none; " +
+                $"transition: all {_transitionDelaySeconds.ToString(CultureInfo.InvariantCulture)}s ease; " +
+                "transform: translateY(100%);" +
+                "transform: scaleY(1);"
+        ) +
+        (_isChangingSlide
+            ? "animation-name: example;" +
+                "animation-duration: 1.2s;" +
+                "--from-width:10px; --to-width:20px;"
+            : string.Empty
+        );
+
+    private string _contentStyle =>
+        "position: fixed;" +
+        "pointer-events:none;" +
+        "touch-action: none;" +
+        "z-index: 1100;" +
+        "top:10%;" +
+        "left: 0;" +
+        "height: 90%;" +
+        "width: 100%;" +
+        "max-width: 100%;" +
         "display: flex;" +
         "flex-direction: column;" +
         "overflow-x: hidden;" +

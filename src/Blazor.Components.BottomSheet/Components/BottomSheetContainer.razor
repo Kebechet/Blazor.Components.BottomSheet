@@ -2,7 +2,10 @@
 @inject NavigationManager _navigationManager
 @inject IServiceProvider _serviceProvider
 
-<div style=@_wrapperStyle class="bottom-sheet-container" @onclick=@(async ()=> await Hide())>
+<div style=@_darkAreaStyle class="bottom-sheet-container" @onclick=@(async ()=> await Hide())>
+</div>
+
+<div style=@_contentStyle class="bottom-sheet-container">
     @for (int i = 0; i < _bottomSheetData.Count; i++)
     {
         var bottomSheetIndex = i;

@@ -14,9 +14,8 @@ public partial class BottomSheetTemplate
         "touch-action: none;" +
         "width: 100%;" +
         "max-width: 100%;" +
-        "height: calc(100% - 100px);" +
+        "height: 100%;" +
         "position:fixed;" +
-        "top:100px;" +
         "margin-left: auto;" +
         "margin-right: auto;" +
         "box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" +
