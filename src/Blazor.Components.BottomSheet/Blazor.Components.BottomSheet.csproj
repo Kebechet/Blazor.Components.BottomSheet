@@ -20,8 +20,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
-    <Version>1.1.6</Version>
-    <PackageReleaseNotes>Fixed iOS Safari blur</PackageReleaseNotes>
+    <Version>1.1.7</Version>
+    <PackageReleaseNotes>Fixed miss-click and top background</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
