@@ -69,6 +69,7 @@ public partial class BottomSheetContainer : ComponentBase
         "display: flex;" +
         "flex-direction: column;" +
         "overflow-x: hidden;" +
+        "border-radius 30px 30px 0 0;" +
         (IsVisible
            ? "opacity: 1; " +
                 "pointer-events: auto; " +
