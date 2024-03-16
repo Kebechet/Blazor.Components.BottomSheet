@@ -24,7 +24,9 @@ public partial class BottomSheetTemplate
         "z-index:auto;";
 
     private string _contentFramePadding =>
-        "padding: 0.75rem;" +
+        "padding-top: 0.75rem;" +
+        "padding-left: 0.75rem;" +
+        "padding-right: 0.75rem;" +
         "height:100%;" +
         "display: flex;" +
         "flex-direction: column;";
